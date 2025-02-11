@@ -1,0 +1,10 @@
+{
+    "name": "Models",
+    "version": "0.0.1",
+    "description": "Description of models.",
+    "author_name": "Me",
+    "author_url": "https://mywebsite.me",
+    "plugin_url": "https://github.com/my_name/models",
+    "tags": "cat, template, example",
+    "thumb": "https://raw.githubusercontent.com/my_repo_path/models.png"
+}
