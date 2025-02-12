@@ -1,10 +1,10 @@
 {
     "name": "Models",
-    "version": "0.0.1",
-    "description": "Description of models.",
-    "author_name": "Me",
-    "author_url": "https://mywebsite.me",
-    "plugin_url": "https://github.com/my_name/models",
-    "tags": "cat, template, example",
-    "thumb": "https://raw.githubusercontent.com/my_repo_path/models.png"
+    "version": "0.1.0",
+    "description": "Provide the default integration for the most popular models (OpenAI, Ollama, ...)",
+    "author_name": "loky-lp",
+    "author_url": "https://github.com/loky-lp",
+    "plugin_url": "https://github.com/cheshire-cat-ai/models-plugin",
+    "tags": "cat, Integration, SaaS, AI",
+    "thumb": "https://cheshirecat.ai/wp-content/uploads/2023/10/Logo-Cheshire-Cat.svg"
 }
