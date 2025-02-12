@@ -1,31 +1,61 @@
+from typing import List
 from cat.mad_hatter.decorators import tool, hook, plugin
-from pydantic import BaseModel
-from datetime import datetime, date
 
-class MySettings(BaseModel):
-    required_int: int
-    optional_int: int = 69
-    required_str: str
-    optional_str: str = "meow"
-    required_date: date
-    optional_date: date = 1679616000
+from .llm.anthropic import LLMAnthropicChatConfig
+from .llm.cohere import LLMCohereConfig
+from .llm.gemini import LLMGeminiChatConfig
+from .llm.hugging_face import LLMHuggingFaceEndpointConfig, LLMHuggingFaceTextGenInferenceConfig
+from .llm.openai import (
+    LLMOpenAIChatConfig,
+    LLMOpenAIConfig,
+    LLMOpenAICompatibleConfig,
+    LLMAzureOpenAIConfig,
+    LLMAzureChatOpenAIConfig,
+)
+from .llm.ollama import LLMOllamaConfig
 
-@plugin
-def settings_model():
-    return MySettings
+from .embedder.embedder import (
+    EmbedderOpenAICompatibleConfig,
+    EmbedderOpenAIConfig,
+    EmbedderAzureOpenAIConfig,
+    EmbedderCohereConfig,
+    EmbedderQdrantFastEmbedConfig,
+    EmbedderGeminiChatConfig,
+)
 
-@tool
-def get_the_day(tool_input, cat):
-    """Get the day of the week. Input is always None."""
+# TODO: Add settings to allow model management
 
-    dt = datetime.now()
-
-    return dt.strftime('%A')
+llms = [
+    LLMAnthropicChatConfig,
+    LLMCohereConfig,
+    LLMGeminiChatConfig,
+    LLMHuggingFaceEndpointConfig,
+    LLMHuggingFaceTextGenInferenceConfig,
+    LLMOpenAIChatConfig,
+    LLMOpenAIConfig,
+    LLMOpenAICompatibleConfig,
+    LLMAzureOpenAIConfig,
+    LLMAzureChatOpenAIConfig,
+    LLMOllamaConfig,
+]
 
 @hook
-def before_cat_sends_message(message, cat):
+def factory_allowed_llms(allowed, cat) -> List:
+    allowed = allowed + llms
+    return allowed
 
-    prompt = f'Rephrase the following sentence in a grumpy way: {message["content"]}'
-    message["content"] = cat.llm(prompt)
 
-    return message
+embedders = [
+    EmbedderOpenAICompatibleConfig,
+    EmbedderOpenAIConfig,
+    EmbedderAzureOpenAIConfig,
+    EmbedderCohereConfig,
+    EmbedderQdrantFastEmbedConfig,
+    EmbedderGeminiChatConfig,
+]
+
+
+@hook
+def factory_allowed_embedders(allowed, cat) -> List:
+    allowed = allowed + embedders
+    return allowed
